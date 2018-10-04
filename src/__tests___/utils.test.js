@@ -1,7 +1,7 @@
 import {
   sum, 
   capitialize,
-} from './utils';
+} from '../utils';
 
 it ('adds two numbers', () => {
   const expected = 5;

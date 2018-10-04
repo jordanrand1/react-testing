@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TodoList /> render matches a snapshot 1`] = `
+<Fragment>
+  <form
+    onSubmit={[Function]}
+  >
+    <label
+      style={Object {}}
+    >
+      Add a Todo
+    </label>
+    <input
+      name="name"
+      onChange={[Function]}
+      placeholder="Add Item"
+      required={true}
+      value=""
+    />
+    <ul />
+  </form>
+</Fragment>
+`;
+
+exports[`<TodoList /> render matches a snapshot with props 1`] = `
+<Fragment>
+  <form
+    onSubmit={[Function]}
+  >
+    <label
+      style={Object {}}
+    >
+      Add a Todo
+    </label>
+    <input
+      name="name"
+      onChange={[Function]}
+      placeholder="Add Item"
+      required={true}
+      value=""
+    />
+    <ul />
+  </form>
+</Fragment>
+`;
