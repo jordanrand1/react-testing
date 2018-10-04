@@ -1,7 +1,9 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { addItem, removeItem } from './reducers/items'
 
-class TodoList extends React.Component {
-  state = { items: [], name: '', color: '' }
+export class TodoList extends React.Component {
+  state = { name: '', color: '' }
 
   static getDerivedStateFromProps(props, state) {
     if (props.color && props.color !== state.color)
@@ -16,18 +18,24 @@ class TodoList extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault()
     const { items, name } = this.state
-    this.setState({ items: [name, ...items], name: '' })
+    this.props.dispatch(addItem(name))
+    this.setState({ name: '' })
+  }
+
+  deleteItem = (index) => {
+    this.props.dispatch(removeItem(index))
   }
 
   render() {
-    const { name, items, color } = this.state
+    const { name, color } = this.state
+    const { items } = this.props
     return (
       <>
         <form onSubmit={this.handleSubmit}>
           <label
             style={ color ? { backgroundColor: color } : {} }
           >
-            Add a Todo
+            Add A Todo
           </label>
           <input
             name="name"
@@ -37,7 +45,19 @@ class TodoList extends React.Component {
             placeholder="Add Item"
           />
           <ul>
-            { items.map( (item, i) => <li key={i}>{item}</li> ) }
+            { items.map( (item, i) => 
+                <li key={i}>
+                  {item}
+                  {' '}
+                  <span 
+                    style={{ color: 'red'}} 
+                    onClick={() => this.deleteItem(i)}
+                  >
+                    X
+                  </span>
+                </li> 
+              ) 
+            }
           </ul>
         </form>
       </>
@@ -45,4 +65,9 @@ class TodoList extends React.Component {
   }
 }
 
-export default TodoList
+const mapStateToProps = (state) => {
+  return { items: state.items }
+}
+
+export default connect(mapStateToProps)(TodoList)
+
